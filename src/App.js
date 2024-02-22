@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 import MainLayout from "./layouts/backend/MainLayout";
 import Home from "./components/client/Home";
+import Login from "./components/client/auth/Login";
+import Register from "./components/client/auth/Register";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/admin/*" element={<MainLayout />} />
           {/* Redirect should come after specific routes */}
           <Route
