@@ -17,7 +17,7 @@ const Navbar = () => {
         <i className="fas fa-bars"></i>
       </button>
       {/* <!-- Navbar Search--> */}
-      <form classNameName="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+      <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
         <div className="input-group">
           <input
             className="form-control"

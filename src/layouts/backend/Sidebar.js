@@ -7,16 +7,22 @@ const Sidebar = () => {
       <div className="sb-sidenav-menu">
         <div className="nav">
           <div className="sb-sidenav-menu-heading">Core</div>
-          <Link className="nav-link" href="index.html">
+          <Link className="nav-link" to="/admin/dashboard">
             <div className="sb-nav-link-icon">
               <i className="fas fa-tachometer-alt"></i>
             </div>
             Dashboard
           </Link>
+          <Link className="nav-link" to="/admin/profile">
+            <div className="sb-nav-link-icon">
+              <i className="fas fa-tachometer-alt"></i>
+            </div>
+            Profile
+          </Link>
           <div className="sb-sidenav-menu-heading">Interface</div>
           <Link
             className="nav-link collapsed"
-            href="#"
+            to="#"
             data-bs-toggle="collapse"
             data-bs-target="#collapseLayouts"
             aria-expanded="false"
@@ -37,17 +43,17 @@ const Sidebar = () => {
             data-bs-parent="#sidenavAccordion"
           >
             <nav className="sb-sidenav-menu-nested nav">
-              <Link className="nav-link" href="layout-static.html">
+              <Link className="nav-link" to="layout-static.html">
                 Static Navigation
               </Link>
-              <Link className="nav-link" href="layout-sidenav-light.html">
+              <Link className="nav-link" to="layout-sidenav-light.html">
                 Light Sidenav
               </Link>
             </nav>
           </div>
           <Link
             className="nav-link collapsed"
-            href="#"
+            to="#"
             data-bs-toggle="collapse"
             data-bs-target="#collapsePages"
             aria-expanded="false"
@@ -73,7 +79,7 @@ const Sidebar = () => {
             >
               <Link
                 className="nav-link collapsed"
-                href="#"
+                to="#"
                 data-bs-toggle="collapse"
                 data-bs-target="#pagesCollapseAuth"
                 aria-expanded="false"
@@ -91,20 +97,20 @@ const Sidebar = () => {
                 data-bs-parent="#sidenavAccordionPages"
               >
                 <nav className="sb-sidenav-menu-nested nav">
-                  <Link className="nav-link" href="login.html">
+                  <Link className="nav-link" to="login.html">
                     Login
                   </Link>
-                  <Link className="nav-link" href="register.html">
+                  <Link className="nav-link" to="register.html">
                     Register
                   </Link>
-                  <Link className="nav-link" href="password.html">
+                  <Link className="nav-link" to="password.html">
                     Forgot Password
                   </Link>
                 </nav>
               </div>
               <Link
                 className="nav-link collapsed"
-                href="#"
+                to="#"
                 data-bs-toggle="collapse"
                 data-bs-target="#pagesCollapseError"
                 aria-expanded="false"
@@ -122,13 +128,13 @@ const Sidebar = () => {
                 data-bs-parent="#sidenavAccordionPages"
               >
                 <nav className="sb-sidenav-menu-nested nav">
-                  <Link className="nav-link" href="401.html">
+                  <Link className="nav-link" to="401.html">
                     401 Page
                   </Link>
-                  <Link className="nav-link" href="404.html">
+                  <Link className="nav-link" to="404.html">
                     404 Page
                   </Link>
-                  <Link className="nav-link" href="500.html">
+                  <Link className="nav-link" to="500.html">
                     500 Page
                   </Link>
                 </nav>
@@ -136,13 +142,13 @@ const Sidebar = () => {
             </nav>
           </div>
           <div className="sb-sidenav-menu-heading">Addons</div>
-          <Link className="nav-link" href="charts.html">
+          <Link className="nav-link" to="charts.html">
             <div className="sb-nav-link-icon">
               <i className="fas fa-chart-area"></i>
             </div>
             Charts
           </Link>
-          <Link className="nav-link" href="tables.html">
+          <Link className="nav-link" to="tables.html">
             <div className="sb-nav-link-icon">
               <i className="fas fa-table"></i>
             </div>
