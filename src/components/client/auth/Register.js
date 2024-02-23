@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import Navbar from "../../../layouts/frontend/Navbar";
 import axios from "axios";
+import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [registerInput, setRegisterInput] = useState({
     name: "",
     email: "",
     password: "",
-    error_list: {}, // Changed from array to object
+    error_list: {},
   });
 
   const handleChange = (e) => {
     e.persist();
-    setRegisterInput({ ...registerInput, [e.target.name]: e.target.value }); // Fixed to set value directly
+    setRegisterInput({ ...registerInput, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
@@ -26,6 +29,10 @@ const Register = () => {
     axios.get("/sanctum/csrf-cookie").then((response) => {
       axios.post(`/api/register`, data).then((res) => {
         if (res.data.status === 200) {
+          localStorage.setItem("auth_token", res.data.token);
+          localStorage.setItem("auth_name", res.data.username);
+          swal("Success", res.data.message);
+          navigate("/");
         } else {
           setRegisterInput({
             ...registerInput,
