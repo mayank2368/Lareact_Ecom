@@ -9,8 +9,14 @@ import MainLayout from "./layouts/backend/MainLayout";
 import Home from "./components/client/Home";
 import Login from "./components/client/auth/Login";
 import Register from "./components/client/auth/Register";
+import axios from "axios";
 
 function App() {
+  axios.defaults.baseURL = "http://localhost:8000/";
+  axios.defaults.headers.post["Content-type"] = "application/json";
+  axios.defaults.headers.post["Accept"] = "application.json";
+  axios.defaults.withCredentials = true;
+  axios.defaults.withXSRFToken = true;
   return (
     <div className="App">
       <Router>
