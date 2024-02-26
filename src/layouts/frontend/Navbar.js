@@ -1,14 +1,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import swal from "sweetalert";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const logoutHandler = () => {
-    localStorage.removeItem("auth_token");
-    localStorage.removeItem("auth_name");
-    navigate("/login");
+  const logoutHandler = (e) => {
+    e.preventDefault();
+    axios
+      .post(`/api/logout`)
+      .then((res) => {
+        if (res.data.status === 200) {
+          localStorage.removeItem("auth_token");
+          localStorage.removeItem("auth_name");
+          swal({
+            text: res.data.message,
+            icon: "success",
+            buttons: false,
+            timer: 2000,
+          }).then(() => {
+            navigate("/");
+          });
+        } else {
+          console.error("Logout failed", res.data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error during logout:", error);
+        swal({
+          title: "Error",
+          text: "Something went wrong during logout.",
+          icon: "error",
+          button: true,
+        });
+      });
   };
+
   var AuthButtons = "";
   if (!localStorage.getItem("auth_token")) {
     AuthButtons = (

@@ -14,9 +14,18 @@ import axios from "axios";
 function App() {
   axios.defaults.baseURL = "http://localhost:8000/";
   axios.defaults.headers.post["Content-type"] = "application/json";
-  axios.defaults.headers.post["Accept"] = "application.json";
+  axios.defaults.headers.post["Accept"] = "application/json";
   axios.defaults.withCredentials = true;
   axios.defaults.withXSRFToken = true;
+  axios.interceptors.request.use(function (config) {
+    config.headers = config.headers || {};
+    const token = localStorage.getItem("auth_token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+  });
   return (
     <div className="App">
       <Router>
