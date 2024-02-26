@@ -31,8 +31,27 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route
+            path="/login"
+            element={
+              localStorage.getItem("auth_token") ? (
+                <Navigate to="/" />
+              ) : (
+                <Login />
+              )
+            }
+          />
+          <Route
+            to="/register"
+            element={
+              localStorage.getItem("auth_token") ? (
+                <Navigate to="/" />
+              ) : (
+                <Register />
+              )
+            }
+          />
+
           <Route path="/admin/*" element={<MainLayout />} />
           {/* Redirect should come after specific routes */}
           <Route
