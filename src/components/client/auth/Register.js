@@ -31,8 +31,15 @@ const Register = () => {
         if (res.data.status === 200) {
           localStorage.setItem("auth_token", res.data.token);
           localStorage.setItem("auth_name", res.data.username);
-          swal("Success", res.data.message);
-          navigate("/");
+
+          swal({
+            text: res.data.message,
+            icon: "success",
+            buttons: false,
+            timer: 2000,
+          }).then(() => {
+            navigate("/");
+          });
         } else {
           setRegisterInput({
             ...registerInput,
@@ -64,7 +71,9 @@ const Register = () => {
                         value={registerInput.name}
                         className="form-control"
                       />
-                      <span>{registerInput.error_list.name}</span>
+                      <span style={{ color: "red" }}>
+                        {registerInput.error_list.name}
+                      </span>
                     </div>
                     <div className="form-group mb-3">
                       <label>Email ID</label>
@@ -76,7 +85,9 @@ const Register = () => {
                         value={registerInput.email}
                         className="form-control"
                       />
-                      <span>{registerInput.error_list.email}</span>
+                      <span style={{ color: "red" }}>
+                        {registerInput.error_list.email}
+                      </span>
                     </div>
                     <div className="form-group mb-3">
                       <label>Password</label>
@@ -88,7 +99,9 @@ const Register = () => {
                         value={registerInput.password}
                         className="form-control"
                       />
-                      <span>{registerInput.error_list.password}</span>
+                      <span style={{ color: "red" }}>
+                        {registerInput.error_list.password}
+                      </span>
                     </div>
                     {/* <div className="form-group mb-3">
                       <label>Confirm Password</label>
