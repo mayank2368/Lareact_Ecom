@@ -5,11 +5,13 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import MainLayout from "./layouts/backend/MainLayout";
 import Home from "./components/client/Home";
 import Login from "./components/client/auth/Login";
 import Register from "./components/client/auth/Register";
 import axios from "axios";
+import AdminPrivateRoute from "./AdminPrivateRoute";
+import MainLayout from "./layouts/backend/MainLayout";
+import Dashboard from "./components/admin/Dashboard";
 
 function App() {
   axios.defaults.baseURL = "http://localhost:8000/";
@@ -42,7 +44,7 @@ function App() {
             }
           />
           <Route
-            to="/register"
+            path="/register"
             element={
               localStorage.getItem("auth_token") ? (
                 <Navigate to="/" />
@@ -52,12 +54,15 @@ function App() {
             }
           />
 
-          <Route path="/admin/*" element={<MainLayout />} />
-          {/* Redirect should come after specific routes */}
-          <Route
-            path="*"
-            element={<Navigate replace to="/admin/dashboard" />}
-          />
+          {/* Protected Admin Routes */}
+          <Route element={<AdminPrivateRoute />}>
+            <Route path="/admin/*" element={<MainLayout />}>
+              <Route path="dashboard" element={<Dashboard />} />
+            </Route>
+          </Route>
+
+          {/* Redirect for any unmatched route */}
+          <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>
       </Router>
     </div>
