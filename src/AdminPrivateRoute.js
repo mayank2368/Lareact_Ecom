@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import MainLayout from "../src/layouts/backend/MainLayout";
 import axios from "axios";
 
 const AdminPrivateRoute = () => {
@@ -8,30 +7,20 @@ const AdminPrivateRoute = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`/api/checkingAuthenticated`).then((res) => {
-      if (res.status === 200) {
-        setAuthenticated(true);
-      }
-      setLoading(false);
-      return () => {
-        setAuthenticated(false);
-      };
-    });
+    axios
+      .get("/api/checkingAuthenticated")
+      .then((response) => {
+        if (response.status === 200) {
+          setAuthenticated(true);
+        }
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, []);
 
-  if (loading) {
-    return <h1>Loading...</h1>;
-  }
+  if (loading) return <h1>Loading...</h1>;
 
-  const isAuthenticated = authenticated;
-
-  return isAuthenticated ? (
-    <MainLayout>
-      <Outlet />
-    </MainLayout>
-  ) : (
-    <Navigate to="/login" replace state={{ from: "/admin" }} />
-  );
+  return authenticated ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 export default AdminPrivateRoute;

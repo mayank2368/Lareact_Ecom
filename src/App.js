@@ -12,6 +12,7 @@ import axios from "axios";
 import AdminPrivateRoute from "./AdminPrivateRoute";
 import MainLayout from "./layouts/backend/MainLayout";
 import Dashboard from "./components/admin/Dashboard";
+import Profile from "./components/admin/Profile";
 
 function App() {
   axios.defaults.baseURL = "http://localhost:8000/";
@@ -33,31 +34,14 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/login"
-            element={
-              localStorage.getItem("auth_token") ? (
-                <Navigate to="/" />
-              ) : (
-                <Login />
-              )
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              localStorage.getItem("auth_token") ? (
-                <Navigate to="/" />
-              ) : (
-                <Register />
-              )
-            }
-          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
           {/* Protected Admin Routes */}
-          <Route element={<AdminPrivateRoute />}>
-            <Route path="/admin/*" element={<MainLayout />}>
+          <Route path="/admin/*" element={<AdminPrivateRoute />}>
+            <Route path="" element={<MainLayout />}>
               <Route path="dashboard" element={<Dashboard />} />
+              <Route path="profile" element={<Profile />} />
             </Route>
           </Route>
 
